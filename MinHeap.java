@@ -37,7 +37,7 @@ public class MinHeap {
 
         if(isEmpty()) return null;
 
-        return heap_array[index];
+        return heap_array[0];
 
     }
 
@@ -131,6 +131,8 @@ public class MinHeap {
 
 
     public Integer deleteKey(int index){
+
+        if(isEmpty()) return null;
 
         decreaseKey(index);
 

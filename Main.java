@@ -2,13 +2,18 @@ public class Main {
     
     public static void main(String[] args) {
         
-        MinHeap heap = new MinHeap(10);
+        MaxHeap heap = new MaxHeap(10);
+        MinHeap heap2 = new MinHeap(10);
 
-        for(int i=0; i<heap.capacity; i++) heap.insertKey(i);
+        for(int i=9; i>=0; i--) heap.insertKey(i);
+        for(int i=0; i<10; i++) heap2.insertKey(i);
 
-        heap.deleteKey(5);
-        heap.deleteKey(2);
+        heap.deleteKey(7);
+        heap.extractMax();
+        heap.extractMax();
+
         System.out.println(heap);
+        System.out.println(heap2);
 
 
        
