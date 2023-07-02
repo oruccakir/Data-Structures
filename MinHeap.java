@@ -1,8 +1,8 @@
 
 
-public class MinHeap {
+public class MinHeap <T extends Comparable<T> >{
 
-    public Integer[] heap_array;
+    public Object[] heap_array;
     public int heap_size;
     public int capacity;
     public int index = -1;
@@ -10,14 +10,14 @@ public class MinHeap {
     public MinHeap(){
 
         this.capacity = 16;
-        heap_array = new Integer[capacity];
+        heap_array = new Object[capacity];
 
     }
 
     public MinHeap(int capacity){
 
         this.capacity = capacity;
-        heap_array = new Integer[capacity];
+        heap_array = new Object[capacity];
 
     }
 
@@ -33,11 +33,11 @@ public class MinHeap {
         return (index - 1) / 2;
     }
     
-    public Integer getMin(){
+    public T getMin(){
 
         if(isEmpty()) return null;
 
-        return heap_array[0];
+        return (T)heap_array[0];
 
     }
 
@@ -54,7 +54,7 @@ public class MinHeap {
 
     public void swap(int index1, int index2){
 
-        Integer temp = heap_array[index1];
+        Object temp = heap_array[index1];
         heap_array[index1] = heap_array[index2];
         heap_array[index2] = temp;
 
@@ -67,9 +67,9 @@ public class MinHeap {
 
         int minIndex = index;
 
-        if(l < heap_size &&  heap_array[l] < heap_array[minIndex]) minIndex = l;
+        if(l < heap_size &&  ((T)heap_array[l]).compareTo((T)heap_array[minIndex])< 0) minIndex = l;
 
-        if(r < heap_size &&  heap_array[r] < heap_array[minIndex]) minIndex = r;
+        if(r < heap_size &&  ((T)heap_array[r]).compareTo((T)heap_array[minIndex])< 0) minIndex = r;
 
         if(minIndex != index){
 
@@ -81,13 +81,13 @@ public class MinHeap {
 
     }
 
-    public Integer extractMin(){
+    public T extractMin(){
 
         if(isEmpty()) return null;
 
         if(heap_size == 1){
 
-            Integer deletedElement = heap_array[index];
+            T deletedElement = (T)heap_array[index];
 
             heap_array[index] = null;
 
@@ -99,7 +99,7 @@ public class MinHeap {
 
         }
 
-        Integer deletedElement = heap_array[0];
+        T deletedElement = (T)heap_array[0];
 
         heap_array[0] = heap_array[index];
 
@@ -119,7 +119,7 @@ public class MinHeap {
 
         heap_array[index] = Integer.MIN_VALUE;
 
-        while(index != 0 && heap_array[parentIndex(index)] > heap_array[index]){
+        while(index != 0 && ((T)heap_array[parentIndex(index)]).compareTo((T) heap_array[index])>0){
 
             swap(index, parentIndex(index));
 
@@ -130,7 +130,7 @@ public class MinHeap {
     }
 
 
-    public Integer deleteKey(int index){
+    public T deleteKey(int index){
 
         if(isEmpty()) return null;
 
@@ -140,7 +140,7 @@ public class MinHeap {
 
     }
 
-    public void insertKey(Integer data){
+    public void insertKey(T data){
 
         if(isFull()) return;
 
@@ -151,7 +151,7 @@ public class MinHeap {
 
         heap_array[index] = data;
 
-        while(index != 0 && heap_array[parentIndex(index)] > heap_array[index]){
+        while(index != 0 && ((T)heap_array[parentIndex(index)]).compareTo((T) heap_array[index])>0){
 
             swap(index, parentIndex(index));
 
