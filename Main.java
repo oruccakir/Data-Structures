@@ -2,12 +2,28 @@ public class Main {
     
     public static void main(String[] args) {
         
-        MinHeap<Integer> heap2 = new MinHeap<>(10);
+        int k = 6;
 
-        for(int i=0; i<10; i++) heap2.insertKey(i);
-        
-        System.out.println(heap2);
+        int arr[] = {1,5,9,6,1,21};
 
+        PriorityQueue<Integer> pq = new PriorityQueue<>(k);
+
+        for(int i=0; i<arr.length; i++){
+
+            if(pq.size() == k && pq.peek()<arr[i]){
+
+                pq.pop();
+                pq.add(arr[i]);
+
+            }
+
+            else{
+                pq.add(arr[i]);
+            }
+
+        }
+
+        System.out.println(pq.peek());
 
        
 
