@@ -100,8 +100,32 @@ public class PriorityQueue<T extends Comparable<T>> implements PriorityInterface
 
     @Override
     public boolean contains(Object data) {
-        // TODO Auto-generated method stub
-        return false;
+
+        if(data == null) return false;
+        
+        boolean isContain = false;
+
+        Object [] data_arrray = null;
+
+        if(type.equals("Min")){
+            data_arrray = minHeap.heap_array;
+        }
+        else{
+            data_arrray = maxHeap.heap_array;
+        }
+
+        int index = 0;
+
+        while(index < data_arrray.length && !isContain){
+
+            if(data_arrray[i].equals(data)) isContain = true;
+
+        }
+        
+
+        return isContain;
+
+
     }
 
     @Override
@@ -168,8 +192,27 @@ public class PriorityQueue<T extends Comparable<T>> implements PriorityInterface
 
     @Override
     public T[] toArray() {
-        // TODO Auto-generated method stub
-        return null;
+        
+        Object[] arr = null;
+
+        Object [] data_arrray = null;
+
+        if(type.equals("Min")){
+            data_arrray = minHeap.heap_array;
+        }
+        else{
+            data_arrray = maxHeap.heap_array;
+        }
+
+        arr = new Object[data_arrray.length];
+
+        for(int i=0; i<arr.length; i++){
+            arr[i] = data_arrray[i];
+        }
+
+        return (T[])arr;
     }
+
+    
     
 }
