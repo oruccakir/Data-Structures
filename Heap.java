@@ -93,6 +93,17 @@ public class Heap {
 
     }
 
+    public static <T> int height(T[] heap,int index,int size){
+
+        int left = 2*index+1;
+        int right = 2*index+2;
+
+        if((left < size && heap[left] == null || left >= size ) && (right < size && heap[right] == null || right >= size ) ) return 0;
+
+        return 1 + Math.max(height(heap, left,size),height(heap, right,size));
+
+    }
+
     public static void main(String[] args) {
         
         int arr[] = {1,8,6,5,1,4,2,9};
