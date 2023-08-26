@@ -96,12 +96,40 @@ public class DoubledEndedPriorityQueue <T extends Comparable<T>> implements Doub
     @Override
     public T pollFirst() {
 
-        return null;
+        if(root == null) return null;
+
+        T key = null;
+
+        Node left = root;
+
+        while(left.left != null)
+            left = left.left;
+
+        key = left.data;
+
+        remove(key);
+
+        return key;
+        
     }
 
     @Override
     public T pollLast() {
-        return null;
+
+        if(root == null) return null;
+
+        T key = null;
+
+        Node right = root;
+
+        while(right.right != null)
+            right = right.right;
+        
+        key = right.data;
+
+        remove(key);
+
+        return key;
     }
 
     @Override
@@ -110,9 +138,52 @@ public class DoubledEndedPriorityQueue <T extends Comparable<T>> implements Doub
     }
 
     @Override
-    public T remove(T data) {
-        return null;
+    public void remove(T data) {
+        root = deleteHelp(root, data);
     }
+
+    private Node deleteHelp(Node root,T key){
+
+        if(root == null) return null;
+
+        else if(root.data.compareTo(key) > 0)
+            root.left = deleteHelp(root.left, key);
+        else if(root.data.compareTo(key) < 0)
+            root.right = deleteHelp(root.right, key);
+        else{
+
+            if(root.left == null){
+                size--;
+                return root.right;
+            }
+            else if(root.right == null){
+                size--;
+                return root.left;
+            }
+
+            root.data = inorderSuccessor(root.right);
+
+            root.right = deleteHelp(root.right,root.data);
+
+            size--;
+
+        }
+
+        return root;
+    }
+
+    private T inorderSuccessor(Node root){
+
+        Node temp = root;
+
+        while (temp.left != null)
+            temp = temp.left;
+
+        return temp.data;
+
+    }
+
+
 
     public boolean search(Node root, T data){
 
@@ -179,10 +250,20 @@ public class DoubledEndedPriorityQueue <T extends Comparable<T>> implements Doub
         for(int i=0; i<randomIntegers.length; i++)
             db.add(randomIntegers[i]);
         
+        for(int i=0; i<randomIntegers.length-1; i++)
+            System.out.print(db.pollLast()+" ");
+
+        System.out.println();
+
+        System.out.println(db.size());
+
+        db.pollLast();
+
         System.out.println(db);
-        System.out.println(db.peekFirst());
-        System.out.println(db.peekLast());
-        System.out.println(db.contains(68));
+
+        System.out.println(db.size);
+        
+        
 
 
     }

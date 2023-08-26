@@ -62,7 +62,7 @@ public interface DoubleEndedInterface<T extends Comparable<T>> {
      * @param data the element to remove.
      * @return the removed element, or null if not found.
      */
-    T remove(T data);
+    void remove(T data);
 
 
 }
